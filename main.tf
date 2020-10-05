@@ -24,13 +24,13 @@ resource "random_id" "this" {
 ###
 # WAF IP4 sets
 resource "aws_wafv2_ip_set" "WAFWhitelistSetV4" {
-  name               = "${local.waf.account_short_name}-WhitelistSetIPV4"
+  name               = "${local.waf.account_short_name}-WhitelistSetIPV4${random_id.this.hex}"
   description        = "Allow whitelist for IPV4 addresses"
   scope              = var.scope
   ip_address_version = "IPV4"
   addresses          = var.whitelist_ipv4
-  provider = aws.scope_region
-  tags = local.common_tags
+  provider           = aws.scope_region
+  tags               = local.common_tags
   lifecycle {
     create_before_destroy = true
   }
@@ -38,26 +38,26 @@ resource "aws_wafv2_ip_set" "WAFWhitelistSetV4" {
 
 
 resource "aws_wafv2_ip_set" "WAFBlacklistSetV4" {
-  name               = "${local.waf.account_short_name}-BlacklistSetIPV4"
+  name               = "${local.waf.account_short_name}-BlacklistSetIPV4${random_id.this.hex}"
   description        = "Block blacklist for IPV4 addresses"
   scope              = var.scope
   ip_address_version = "IPV4"
   addresses          = var.blacklist_ipv4
-  provider = aws.scope_region
-  tags = local.common_tags
+  provider           = aws.scope_region
+  tags               = local.common_tags
   lifecycle {
     create_before_destroy = true
   }
 }
 
 resource "aws_wafv2_ip_set" "WAFReputationListsSetV4" {
-  name               = "${local.waf.account_short_name}-IPReputationListsSetIPV4"
+  name               = "${local.waf.account_short_name}-IPReputationListsSetIPV4${random_id.this.hex}"
   description        = "Block blacklist for IPV4 addresses"
   scope              = var.scope
   ip_address_version = "IPV4"
   addresses          = var.reputation_list_ipv4
   lifecycle {
-    ignore_changes = [addresses]
+    ignore_changes        = [addresses]
     create_before_destroy = true
   }
 
@@ -70,13 +70,13 @@ resource "aws_wafv2_ip_set" "WAFReputationListsSetV4" {
 # WAF IP6 sets
 
 resource "aws_wafv2_ip_set" "WAFReputationListsSetV6" {
-  name               = "${local.waf.account_short_name}-IPReputationListsSetIPV6"
+  name               = "${local.waf.account_short_name}-IPReputationListsSetIPV6${random_id.this.hex}"
   description        = "Block blacklist for IPV6 addresses"
   scope              = var.scope
   ip_address_version = "IPV6"
   addresses          = var.reputation_list_ipv6
   lifecycle {
-    ignore_changes = [addresses]
+    ignore_changes        = [addresses]
     create_before_destroy = true
   }
 
@@ -88,7 +88,7 @@ resource "aws_wafv2_ip_set" "WAFReputationListsSetV6" {
 ###
 # WAF Web ACL & Rules
 resource "aws_wafv2_web_acl" "WAFWebACL" {
-  name        = "AWSWAFSecurityAutomations"
+  name        = "AWSWAFSecurityAutomations${var.scope}${random_id.this.hex}"
   description = "Custom WAFWebACL"
   scope       = var.scope
   provider    = aws.scope_region
