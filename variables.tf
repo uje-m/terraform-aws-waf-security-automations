@@ -9,6 +9,7 @@ variable "tags" {
 
 variable "scope" {
   description = "REGIONAL or CLOUDFRONT type WebACL"
+  default     = "REGIONAL"
   validation {
     condition     = (var.scope == "REGIONAL" || var.scope == "CLOUDFRONT")
     error_message = "Please enter either REGIONAL or CLOUDFRONT."

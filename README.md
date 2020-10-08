@@ -39,7 +39,7 @@
 | name | name of environment | `any` | n/a | yes |
 | reputation\_list\_ipv4 | These lists include the Spamhaus Dont Route Or Peer (DROP) and Extended Drop (EDROP) lists, the Proofpoint Emerging Threats IP list, and the Tor exit node list. | `list` | `[]` | no |
 | reputation\_list\_ipv6 | These lists include the Spamhaus Dont Route Or Peer (DROP) and Extended Drop (EDROP) lists, the Proofpoint Emerging Threats IP list, and the Tor exit node list. | `list` | `[]` | no |
-| scope | REGIONAL or CLOUDFRONT type WebACL | `any` | n/a | yes |
+| scope | REGIONAL or CLOUDFRONT type WebACL | `string` | `"REGIONAL"` | no |
 | tags | Resource tagging | `map` | `{}` | no |
 | whitelist\_ipv4 | Allow whitelist for IPV4 addresses | `list` | `[]` | no |
 

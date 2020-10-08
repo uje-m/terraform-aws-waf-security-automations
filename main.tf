@@ -497,6 +497,7 @@ resource "aws_lambda_function" "ReputationListsParser" {
   timeout       = 300
   filename      = "${path.module}/assets/reputation_lists_parser.zip"
   provider      = aws.scope_region
+  #checkov:skip=CKV_AWS_50:The Lambda is not using X-Ray
   environment {
     variables = {
       IP_SET_ID_REPUTATIONV4      = aws_wafv2_ip_set.WAFReputationListsSetV4.arn
