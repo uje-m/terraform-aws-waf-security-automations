@@ -9,7 +9,6 @@ variable "tags" {
 
 variable "scope" {
   description = "REGIONAL or CLOUDFRONT type WebACL"
-  default     = "REGIONAL"
   validation {
     condition     = (var.scope == "REGIONAL" || var.scope == "CLOUDFRONT")
     error_message = "Please enter either REGIONAL or CLOUDFRONT."
@@ -38,4 +37,10 @@ variable "reputation_list_ipv6" {
 variable "reputation_list_ipv4" {
   description = "These lists include the Spamhaus Dont Route Or Peer (DROP) and Extended Drop (EDROP) lists, the Proofpoint Emerging Threats IP list, and the Tor exit node list."
   default     = []
+}
+
+variable "asw_managed_rules_common_rule_set_exclude_rule" {
+  default     = []
+  type        = list(string)
+  description = "The ExcludedRules specification lists rules whose actions are overridden to count only."
 }

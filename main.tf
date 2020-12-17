@@ -110,6 +110,13 @@ resource "aws_wafv2_web_acl" "WAFWebACL" {
       managed_rule_group_statement {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
+
+        dynamic excluded_rule {
+          for_each = var.asw_managed_rules_common_rule_set_exclude_rule == [] ? [] : var.asw_managed_rules_common_rule_set_exclude_rule
+          content {
+            name = excluded_rule.value
+          }
+        }
       }
     }
     visibility_config {
@@ -497,7 +504,6 @@ resource "aws_lambda_function" "ReputationListsParser" {
   timeout       = 300
   filename      = "${path.module}/assets/reputation_lists_parser.zip"
   provider      = aws.scope_region
-  #checkov:skip=CKV_AWS_50:The Lambda is not using X-Ray
   environment {
     variables = {
       IP_SET_ID_REPUTATIONV4      = aws_wafv2_ip_set.WAFReputationListsSetV4.arn

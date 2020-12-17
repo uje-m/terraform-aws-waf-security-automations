@@ -19,14 +19,15 @@
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.13 |
+| terraform | >= 0.12.21 |
+| aws | >= 2.68 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
-| aws.scope\_region | n/a |
+| aws | >= 2.68 |
+| aws.scope\_region | >= 2.68 |
 | random | n/a |
 | template | n/a |
 
@@ -35,11 +36,12 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | allowed\_country\_codes | Whitelist access by country | `list` | `[]` | no |
+| asw\_managed\_rules\_common\_rule\_set\_exclude\_rule | The ExcludedRules specification lists rules whose actions are overridden to count only. | `list(string)` | `[]` | no |
 | blacklist\_ipv4 | Block blacklist for IPV4 addresses | `list` | `[]` | no |
 | name | name of environment | `any` | n/a | yes |
 | reputation\_list\_ipv4 | These lists include the Spamhaus Dont Route Or Peer (DROP) and Extended Drop (EDROP) lists, the Proofpoint Emerging Threats IP list, and the Tor exit node list. | `list` | `[]` | no |
 | reputation\_list\_ipv6 | These lists include the Spamhaus Dont Route Or Peer (DROP) and Extended Drop (EDROP) lists, the Proofpoint Emerging Threats IP list, and the Tor exit node list. | `list` | `[]` | no |
-| scope | REGIONAL or CLOUDFRONT type WebACL | `string` | `"REGIONAL"` | no |
+| scope | REGIONAL or CLOUDFRONT type WebACL | `any` | n/a | yes |
 | tags | Resource tagging | `map` | `{}` | no |
 | whitelist\_ipv4 | Allow whitelist for IPV4 addresses | `list` | `[]` | no |
 
@@ -47,7 +49,7 @@
 
 | Name | Description |
 |------|-------------|
-| this\_wafv2\_webacl\_arn | The name WafV2 WebACL ARN |
+| this\_wafv2\_webacl\_arn | The name WafV2 WebACL ARN. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
