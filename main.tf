@@ -1,6 +1,7 @@
 # AWS provider and region
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
+data "aws_partition" "current" {}
 
 provider "aws" {
   region = local.provider
@@ -111,7 +112,7 @@ resource "aws_wafv2_web_acl" "WAFWebACL" {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
 
-        dynamic excluded_rule {
+        dynamic "excluded_rule" {
           for_each = var.asw_managed_rules_common_rule_set_exclude_rule == [] ? [] : var.asw_managed_rules_common_rule_set_exclude_rule
           content {
             name = excluded_rule.value
@@ -415,7 +416,7 @@ data "aws_iam_policy_document" "LambdaRoleReputationListsParserAssumeRole" {
 data "aws_iam_policy_document" "LambdaRoleReputationListsParserCloudWatchLogs" {
   statement {
     effect    = "Allow"
-    resources = ["arn:aws:logs:${local.provider}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*ReputationListsParser*"]
+    resources = ["arn:${data.aws_partition.current.partition}:logs:${local.provider}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*ReputationListsParser*"]
 
     actions = [
       "logs:CreateLogGroup",
