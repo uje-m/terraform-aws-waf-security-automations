@@ -39,6 +39,7 @@
 | asw\_managed\_rules\_common\_rule\_set\_exclude\_rule | The ExcludedRules specification lists rules whose actions are overridden to count only. | `list(string)` | `[]` | no |
 | blacklist\_ipv4 | Block blacklist for IPV4 addresses | `list` | `[]` | no |
 | name | name of environment | `any` | n/a | yes |
+| region | The current AWS region the resources will be created | `string` | `"eu-west-1"` | no |
 | reputation\_list\_ipv4 | These lists include the Spamhaus Dont Route Or Peer (DROP) and Extended Drop (EDROP) lists, the Proofpoint Emerging Threats IP list, and the Tor exit node list. | `list` | `[]` | no |
 | reputation\_list\_ipv6 | These lists include the Spamhaus Dont Route Or Peer (DROP) and Extended Drop (EDROP) lists, the Proofpoint Emerging Threats IP list, and the Tor exit node list. | `list` | `[]` | no |
 | scope | REGIONAL or CLOUDFRONT type WebACL | `any` | n/a | yes |

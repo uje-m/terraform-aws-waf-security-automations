@@ -44,3 +44,9 @@ variable "asw_managed_rules_common_rule_set_exclude_rule" {
   type        = list(string)
   description = "The ExcludedRules specification lists rules whose actions are overridden to count only."
 }
+
+variable "region" {
+  description = "The current AWS region the resources will be created"
+  type        = string
+  default     = "eu-west-1"
+}

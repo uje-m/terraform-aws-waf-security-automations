@@ -1,6 +1,5 @@
 # AWS provider and region
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 data "aws_partition" "current" {}
 
 provider "aws" {
@@ -15,7 +14,7 @@ locals {
       key_prefix    = "aws-waf-security-automations/v3.1.0"
     }
   }
-  provider    = var.scope == "CLOUDFRONT" ? "us-east-1" : data.aws_region.current.name
+  provider    = var.scope == "CLOUDFRONT" ? "us-east-1" : var.region
   common_tags = var.tags
   waf = {
     account_short_name = upper(var.name)
