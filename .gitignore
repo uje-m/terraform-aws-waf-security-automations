@@ -9,6 +9,8 @@
 backend.hcl
 backend.tf
 *.tfvars
+.terraformrc
+.terraform.lock.hcl
 
 ### https://raw.githubusercontent.com/hashicorp/terraform/master/.gitignore
 *.dll

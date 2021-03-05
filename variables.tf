@@ -50,3 +50,9 @@ variable "region" {
   type        = string
   default     = "eu-west-1"
 }
+
+variable "enable_xss_rule" {
+  description = "Enable or disable XSS Rule"
+  default     = "true"
+  type        = bool
+}

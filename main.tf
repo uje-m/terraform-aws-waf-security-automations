@@ -316,82 +316,85 @@ resource "aws_wafv2_web_acl" "WAFWebACL" {
     }
   }
 
-  rule {
-    name     = "${local.waf.account_short_name}-XssRule"
-    priority = 30
-    statement {
-      or_statement {
-        statement {
-          xss_match_statement {
-            field_to_match {
-              query_string {}
-            }
-            text_transformation {
-              priority = 1
-              type     = "URL_DECODE"
-            }
-            text_transformation {
-              priority = 2
-              type     = "HTML_ENTITY_DECODE"
-            }
-          }
-        }
-        statement {
-          xss_match_statement {
-            field_to_match {
-              body {}
-            }
-            text_transformation {
-              priority = 1
-              type     = "URL_DECODE"
-            }
-            text_transformation {
-              priority = 2
-              type     = "HTML_ENTITY_DECODE"
-            }
-          }
-        }
-        statement {
-          xss_match_statement {
-            field_to_match {
-              uri_path {}
-            }
-            text_transformation {
-              priority = 1
-              type     = "URL_DECODE"
-            }
-            text_transformation {
-              priority = 2
-              type     = "HTML_ENTITY_DECODE"
-            }
-          }
-        }
-        statement {
-          xss_match_statement {
-            field_to_match {
-              single_header {
-                name = "cookie"
+  dynamic "rule" {
+    for_each = var.enable_xss_rule ? [1] : []
+    content {
+      name     = "${local.waf.account_short_name}-XssRule"
+      priority = 30
+      statement {
+        or_statement {
+          statement {
+            xss_match_statement {
+              field_to_match {
+                query_string {}
+              }
+              text_transformation {
+                priority = 1
+                type     = "URL_DECODE"
+              }
+              text_transformation {
+                priority = 2
+                type     = "HTML_ENTITY_DECODE"
               }
             }
-            text_transformation {
-              priority = 1
-              type     = "URL_DECODE"
+          }
+          statement {
+            xss_match_statement {
+              field_to_match {
+                body {}
+              }
+              text_transformation {
+                priority = 1
+                type     = "URL_DECODE"
+              }
+              text_transformation {
+                priority = 2
+                type     = "HTML_ENTITY_DECODE"
+              }
             }
-            text_transformation {
-              priority = 2
-              type     = "HTML_ENTITY_DECODE"
+          }
+          statement {
+            xss_match_statement {
+              field_to_match {
+                uri_path {}
+              }
+              text_transformation {
+                priority = 1
+                type     = "URL_DECODE"
+              }
+              text_transformation {
+                priority = 2
+                type     = "HTML_ENTITY_DECODE"
+              }
+            }
+          }
+          statement {
+            xss_match_statement {
+              field_to_match {
+                single_header {
+                  name = "cookie"
+                }
+              }
+              text_transformation {
+                priority = 1
+                type     = "URL_DECODE"
+              }
+              text_transformation {
+                priority = 2
+                type     = "HTML_ENTITY_DECODE"
+              }
             }
           }
         }
       }
-    }
-    action {
-      block {}
-    }
-    visibility_config {
-      cloudwatch_metrics_enabled = true
-      metric_name                = "${local.waf.account_short_name}-XssRule"
-      sampled_requests_enabled   = true
+      action {
+        block {}
+      }
+      visibility_config {
+        cloudwatch_metrics_enabled = true
+        metric_name                = "${local.waf.account_short_name}-XssRule"
+        sampled_requests_enabled   = true
+      }
     }
   }
 }
