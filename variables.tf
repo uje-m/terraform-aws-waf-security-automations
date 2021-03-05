@@ -56,3 +56,9 @@ variable "enable_xss_rule" {
   default     = "true"
   type        = bool
 }
+
+variable "enable_sqli_rule" {
+  description = "Enable or disable SQLi Rule"
+  default     = "true"
+  type        = bool
+}

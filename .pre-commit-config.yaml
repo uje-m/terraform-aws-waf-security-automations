@@ -22,8 +22,8 @@ repos:
       - id: check-symlinks
       - id: end-of-file-fixer
       - id: detect-private-key
-#      - id: mixed-line-ending
-#        args: [--fix=auto]
+      - id: mixed-line-ending
+        args: [--fix=auto]
       - id: trailing-whitespace
       - id: check-yaml
       - id: detect-aws-credentials

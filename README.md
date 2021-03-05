@@ -38,6 +38,7 @@
 | allowed\_country\_codes | Whitelist access by country | `list` | `[]` | no |
 | asw\_managed\_rules\_common\_rule\_set\_exclude\_rule | The ExcludedRules specification lists rules whose actions are overridden to count only. | `list(string)` | `[]` | no |
 | blacklist\_ipv4 | Block blacklist for IPV4 addresses | `list` | `[]` | no |
+| enable\_sqli\_rule | Enable or disable SQLi Rule | `bool` | `"true"` | no |
 | enable\_xss\_rule | Enable or disable XSS Rule | `bool` | `"true"` | no |
 | name | name of environment | `any` | n/a | yes |
 | region | The current AWS region the resources will be created | `string` | `"eu-west-1"` | no |
